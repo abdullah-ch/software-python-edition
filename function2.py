@@ -1,3 +1,4 @@
+# Basic Calculator
 # The user's inputs for the numbers and the operators
 num1 = float(input('Enter your first number: '))
 Operator = input('Enter operator: ')

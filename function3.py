@@ -1,66 +1,38 @@
-# Python Random Module
-import random
-
-# Intro
-print("Rock, Paper, Scissors...")
-
-# Function
+# function to Check if binary representations
+# of two numbers are anagram
+from collections import Counter
 
 
-def try_again():
-  # Random Choice (Rock, Paper, or Scissors)
-    R_P_S = ["Rock", "Paper", "Scissors"]
-    computer = random.choice(R_P_S)
+def checkAnagram(num1, num2):
 
-  # Player's choice
-    player = input("your choice: ").lower().capitalize()
+    # convert numbers into in binary
+    # and remove first two characters of
+    # output string because bin function
+    # '0b' as prefix in output string
+    bin1 = bin(num1)[2:]
+    bin2 = bin(num2)[2:]
 
-  # If the program chose rock
-    if computer == "Rock":
-        # If the player chose rock
-        if player == "Rock":
-            print(f"I chose {computer}, you chose {player}\nit's a tie!")
-        # If the player chose paper
-        elif player == "Paper":
-            print(f"I chose {computer}, you chose {player}\nYou win!")
-        # If the player chose scissors
-        elif player == "Scissors":
-            print(f"I chose {computer}, you chose {player}\nI win!")
+    # append zeros in shorter string
+    zeros = abs(len(bin1)-len(bin2))
+    if (len(bin1) > len(bin2)):
+        bin2 = zeros * '0' + bin2
+    else:
+        bin1 = zeros * '0' + bin1
 
-  # If the program chose paper
-    elif computer == "Paper":
-        # If the player chose rock
-        if player == "Rock":
-            print(f"I chose {computer}, you chose {player}\nI win!")
-        # If the player chose paper
-        elif player == "Paper":
-            print(f"I chose {computer}, you chose {player}\nIt's a tie!")
-        # If the player chose scissors
-        elif player == "Scissors":
-            print(f"I chose {computer}, you chose {player}\nYou win!")
+    # convert binary representations
+    # into dictionary
+    dict1 = Counter(bin1)
+    dict2 = Counter(bin2)
 
-  # If the program chose scissors
-    elif computer == "Scissors":
-        # If the player chose rock
-        if player == "Rock":
-            print(f"I chose {computer}, you chose {player}\nYou win!")
-        # If the player chose paper
-        elif player == "Paper":
-            print(f"I chose {computer}, you chose {player}\nI win!")
-        # If the player chose scissors
-        elif player == "Scissors":
-            print(f"I chose {computer}, you chose {player}\nIt's a tie")
-
-  # If the player wants to play again
-    play_again = input(
-        "Do you want to play again? yes or no: ").lower().capitalize()
-    # If the player says yes, go back to the function
-    if play_again == "Yes":
-        try_again()
-    # If the player says no, say goodbye
-    elif play_again == "No":
-        print("Goodbye")
+    # compare both dictionaries
+    if dict1 == dict2:
+        print('Yes')
+    else:
+        print('No')
 
 
-# End of function
-try_again()
+# Driver program
+if __name__ == "__main__":
+    num1 = 8
+    num2 = 4
+    checkAnagram(num1, num2)
